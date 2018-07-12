@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>College Form</title>
+<title>Marksheet Form</title>
 <style>
 .error {
 	color: red
@@ -32,48 +32,8 @@
 			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/marksheet/marksheet-form">Add Marksheet</a></li>
 			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/user-list">User List</a></li>
 			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/user-form">Add User</a></li>
-			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">Logout</a></li>
+			<li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
 		</ul>
 	</nav>
 	<br>
-
-	<div class="container">
-		<h2>College Form</h2>
-		<form:form action="collegeRegistration" modelAttribute="college"
-			method="post">
-			<form:hidden path="id" />
-			<table>
-				<tr>
-					<td>College Name:</td>
-					<td><form:input path="name" /></td>
-					<td><form:errors path="name" cssClass="error" /></td>
-				</tr>
-				<tr>
-					<td>Address:</td>
-					<td><form:input path="address" /></td>
-					<td><form:errors path="address" cssClass="error" /></td>
-				</tr>
-				<tr>
-					<td>State:</td>
-					<td><form:input path="state" /></td>
-					<td><form:errors path="state" cssClass="error" /></td>
-				</tr>
-				<tr>
-					<td>City:</td>
-					<td><form:input path="city" /></td>
-					<td><form:errors path="city" cssClass="error" /></td>
-				</tr>
-				<tr>
-					<td>Phone No.:</td>
-					<td><form:input path="phone" /></td>
-					<td><form:errors path="phone" cssClass="error" /></td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="submit" /></td>
-				</tr>
-			</table>
-		</form:form>
-	</div>
 </body>
-</html>
-

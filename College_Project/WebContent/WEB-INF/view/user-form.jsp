@@ -23,7 +23,7 @@
 
 	<nav class="navbar navbar-expand-sm bg-light">
 		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="#">Home Page</a></li>
+			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/dashboard">Home Page</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="${pageContext.request.contextPath}/college/college-list">CollegeList</a></li>
 			<li class="nav-item"><a class="nav-link"
