@@ -9,6 +9,7 @@ Technology:
 3. MySQl
 4. JSP
 5. BootStrap
+6. JDBC
 
 Below are the few screen-shot shown:
 
