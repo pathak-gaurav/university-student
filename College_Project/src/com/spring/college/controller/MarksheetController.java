@@ -3,7 +3,6 @@ package com.spring.college.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.jboss.logging.Logger;
@@ -50,6 +49,7 @@ public class MarksheetController {
 		if (result.hasErrors()) {
 			return "marksheet-form";
 		} else {
+			logger.info("Saving the student marksheet:"+marksheet);
 			marksheetService.saveMarksheet(marksheet);
 			return "redirect:marksheet-list";
 		}
@@ -64,12 +64,14 @@ public class MarksheetController {
 	@GetMapping(value = "/marksheet/marksheetFormForUpdate")
 	public String marksheetFormForUpdate(@RequestParam("marksheet") int theId, Model model) {
 		Marksheet theMarksheet = marksheetService.getMarksheet(theId);
+		logger.info("Updating the student marksheet:"+theMarksheet);
 		model.addAttribute("marksheet", theMarksheet);
 		return "marksheet-form";
 	}
 
 	@GetMapping(value = "/marksheet/marksheet-delete")
 	public String marksheetDelete(@RequestParam("marksheet") int theId, Model model) {
+		logger.info("Deleting the student marksheet:"+theId);
 		marksheetService.deleteMarksheet(theId);
 		return "redirect:marksheet-list";
 	}

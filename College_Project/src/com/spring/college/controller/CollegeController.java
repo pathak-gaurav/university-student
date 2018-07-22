@@ -55,6 +55,7 @@ public class CollegeController {
 		if (result.hasErrors()) {
 			return "college-form";
 		} else {
+			logger.info("Saving the college:"+college);
 			collegeService.saveCollege(college);
 			return "redirect:college-list";
 		}
@@ -75,6 +76,7 @@ public class CollegeController {
 
 	@GetMapping(value = "/college/college-delete")
 	public String collegeDelete(@RequestParam("college") int theId, Model model) {
+		logger.info("Deleting the college:"+theId);
 		collegeService.deleteCollege(theId);
 		return "redirect:college-list";
 	}
@@ -95,7 +97,8 @@ public class CollegeController {
 			Integer userId = (Integer) session.getAttribute("userId");
 			College collegeIdBasedOnUserId = collegeService.getCollegeIdBasedOnUserId(userId);
 			student.setCollegeId(collegeIdBasedOnUserId.getId());
-			studentService.saveStudent(student);
+			logger.info("Saving the student: "+student+". For the college:"+ collegeIdBasedOnUserId);
+			studentService.saveStudent(student); 
 			return "redirect:college-student-list";
 		}
 	}
@@ -103,7 +106,8 @@ public class CollegeController {
 	@RequestMapping(value = "/college/college-student-list")
 	public String getCollegeStudents(Model model, HttpSession session) {
 		Integer userId = (Integer) session.getAttribute("userId");
-		logger.info("User Id of college is coming as:"+userId);
+		College collegeIdBasedOnUserId = collegeService.getCollegeIdBasedOnUserId(userId);
+		logger.info("Listing students of college :"+collegeIdBasedOnUserId);
 		model.addAttribute("studentList", studentService.findByCollegeId(userId));
 		return "college-student-list";
 	}

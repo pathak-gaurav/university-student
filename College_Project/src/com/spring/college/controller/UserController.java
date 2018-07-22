@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -29,6 +30,8 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	@InitBinder
 	public void initBider(WebDataBinder dataBinder) {
@@ -129,6 +132,7 @@ public class UserController {
 		if (result.hasErrors()) {
 			return "user-form";
 		} else {
+			logger.info("Adding the user:"+user);
 			userService.addUser(user);
 			return "redirect:user-list";
 		}
@@ -136,6 +140,7 @@ public class UserController {
 
 	@RequestMapping(value = "/user/user-list")
 	public String listUsers(Model model) {
+		logger.info("Listing all the usersr:"+userService.getUsers());
 		model.addAttribute("user", userService.getUsers());
 		return "user-list";
 	}
@@ -143,12 +148,14 @@ public class UserController {
 	@GetMapping(value = "/user/userFormForUpdate")
 	public String userFormForUpdate(@RequestParam("user") int theId, Model model) {
 		User theUser = userService.getUser(theId);
+		logger.info("Updating the user with Id:"+theId);
 		model.addAttribute("user", theUser);
 		return "user-form";
 	}
 
 	@GetMapping(value = "/user/user-delete")
 	public String UserDelete(@RequestParam("user") int theId, Model model) {
+		logger.info("Deleting the user with Id:"+theId);
 		userService.deleteUser(theId);
 		return "redirect:user-list";
 	}

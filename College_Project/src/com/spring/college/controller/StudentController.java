@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -36,6 +37,8 @@ public class StudentController {
 	@Autowired
 	UserService userService;
 
+	private Logger logger = Logger.getLogger(this.getClass().getName());
+	
 	@InitBinder
 	public void initBider(WebDataBinder dataBinder) {
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
@@ -55,6 +58,7 @@ public class StudentController {
 		if (result.hasErrors()) {
 			return "student-form";
 		} else {
+			logger.info("Saving the student:"+student);
 			studentService.saveStudent(student);
 			return "redirect:student-list";
 		}
@@ -68,6 +72,7 @@ public class StudentController {
 
 	@GetMapping(value = "/student/studentFormForUpdate")
 	public String studentFormForUpdate(@RequestParam("student") int theId, Model model) {
+		logger.info("Updating the student:"+theId);
 		Student theStudent = studentService.getStudent(theId);
 		model.addAttribute("student", theStudent);
 		return "student-form";
@@ -75,6 +80,7 @@ public class StudentController {
 
 	@GetMapping(value = "/student/student-delete")
 	public String StudentDelete(@RequestParam("student") int theId, Model model) {
+		logger.info("Deleting the student:"+theId);
 		studentService.deleteStudent(theId);
 		return "redirect:student-list";
 	}
@@ -83,6 +89,7 @@ public class StudentController {
 	@RequestMapping(value = "/user/my_profile")
 	public String my_profile(Model model, HttpSession session) {
 		Integer userId = (Integer) session.getAttribute("userId");
+		logger.info("Showing user Profile:"+userId);
 		model.addAttribute("userList", userService.findByListId(userId));
 		return "my_profile";
 	}
@@ -90,7 +97,7 @@ public class StudentController {
 	@RequestMapping(value = "/marksheet/my_marks")
 	public String getMarks(Model model, HttpSession session) {
 		Integer userId = (Integer) session.getAttribute("userId");
-		System.out.println("User Id is:"+userId);
+		logger.info("Showing student marks:"+userId);
 		model.addAttribute("marksheetList", marksheetService.getMarksheetIdBasedOnUserId(userId));
 		return "my_marks";
 	}
