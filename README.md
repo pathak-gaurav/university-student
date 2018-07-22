@@ -28,3 +28,9 @@ Technology:
 
     5. College List Shown to Admin
 ![college list admin](https://user-images.githubusercontent.com/31382963/43042425-e6e62226-8d9a-11e8-84b3-676a3c411659.JPG)
+
+    6. College Form Hibernate Validations based on entity
+![college_form_hibernate_validations](https://user-images.githubusercontent.com/31382963/43046263-e43bcdf2-8de3-11e8-907c-c9290f9fc174.JPG)
+
+    7. Student Form Validations based on entity
+![student_form_validations](https://user-images.githubusercontent.com/31382963/43046264-e47265f6-8de3-11e8-8053-3ac52c5583b0.JPG)
