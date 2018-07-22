@@ -11,8 +11,7 @@ Technology:
 5. BootStrap
 6. JDBC
 
-Below are the application screen-shot shown:
---------------------------------------------
+**Below are the application screen-shot**
 
 1. Login Page
 ![login-page](https://user-images.githubusercontent.com/31382963/43042394-4624cedc-8d9a-11e8-9219-aa8c349294f9.JPG)
