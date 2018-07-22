@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.college.entity.Student;
+import com.spring.college.rm.StudentRowMapper;
 
 @Repository
 public class StudentDaoImpl extends BaseDAO implements StudentDao {
@@ -49,6 +50,22 @@ public class StudentDaoImpl extends BaseDAO implements StudentDao {
 		Student studentBean = currentSession.get(Student.class, id);
 		logger.info("Deleting the student:" + studentBean);
 		currentSession.delete(studentBean);
+	}
+
+	@Override
+	public Student getDetails(int id) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Student studentBean = currentSession.get(Student.class, id);
+		return null;
+	}
+	
+	@Override
+	public List<Student> findByCollegeId(Integer userId){
+		String sql = "SELECT s.firstName,s.lastName,s.mobile,s.email,s.collegeName,s.collegeId,studentId"
+				+ " FROM student s INNER JOIN college c ON (s.collegeId = c.id) "
+				+ " INNER JOIN user u ON (u.firstName=c.name) WHERE u.roleId='5' \r\n" + 
+				"	AND u.userId=?";
+		return getJdbcTemplate().query(sql, new StudentRowMapper(), userId);
 	}
 
 }

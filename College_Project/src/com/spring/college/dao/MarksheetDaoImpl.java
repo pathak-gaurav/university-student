@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.college.entity.Marksheet;
+import com.spring.college.rm.MarksheetRowMapper;
 
 @Repository
 public class MarksheetDaoImpl extends BaseDAO implements MarksheetDao {
@@ -59,13 +60,14 @@ public class MarksheetDaoImpl extends BaseDAO implements MarksheetDao {
 
 	@Override
 	public List<Marksheet> findByProperty(String propName, Object propValue) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Marksheet getMarksheetIdBasedOnUserId(Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Marksheet> getMarksheetIdBasedOnUserId(Integer userId) {
+		String sql = "SELECT m.id,m.rollno,m.studentId,m.name,m.physics,m.chemistry,m.maths\r\n" + 
+				" from marksheet m INNER JOIN student s on (m.studentId=s.studentId)\r\n" + 
+				" INNER JOIN USER U on (u.firstName=s.firstName) and (u.lastName=s.lastName) where u.userId=? ";
+		return getJdbcTemplate().query(sql, new MarksheetRowMapper(), userId);
 	}
 }

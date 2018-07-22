@@ -37,7 +37,7 @@ public class UserServiceImpl  extends BaseDAO  implements UserService {
 			return user;
 		} catch (EmptyResultDataAccessException ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("Contact administrator.");
+			throw new RuntimeException("Invalid Credentials!!.");
 		}
 	}
 
@@ -63,6 +63,12 @@ public class UserServiceImpl  extends BaseDAO  implements UserService {
 	@Transactional
 	public void deleteUser(int id) {
 		userDao.deleteUser(id);
+	}
+	
+	@Override
+	@Transactional
+	public List<User> findByListId(Integer userId){
+		return userDao.findByListId(userId);
 	}
 
 }

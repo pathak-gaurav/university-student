@@ -13,4 +13,6 @@ public interface MarksheetService {
 	public Marksheet getMarksheet(int id);
 
 	public void deleteMarksheet(int id);
+	
+	public List<Marksheet> getMarksheetIdBasedOnUserId(Integer userId);
 }

@@ -13,4 +13,6 @@ public interface StudentService {
 	public void saveStudent(Student studentBean);
 
 	public void deleteStudent(int id);
+	
+	public List<Student> findByCollegeId(Integer userId);
 }

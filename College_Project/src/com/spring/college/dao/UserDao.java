@@ -14,4 +14,6 @@ public interface UserDao {
 	
 	public void deleteUser(int id);
 	
+	public List<User> findByListId(Integer userId);
+	
 }

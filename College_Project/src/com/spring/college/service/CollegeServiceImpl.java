@@ -39,4 +39,10 @@ public class CollegeServiceImpl implements CollegeService {
 	public void deleteCollege(int id) {
 		collegeBeanDao.deleteCollege(id);
 	}
+	
+	@Override
+	@Transactional
+	public College getCollegeIdBasedOnUserId(Integer userId) {
+		return collegeBeanDao.getCollegeIdBasedOnUserId(userId);
+	}
 }

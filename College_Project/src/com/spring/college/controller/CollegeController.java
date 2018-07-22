@@ -3,6 +3,7 @@ package com.spring.college.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.jboss.logging.Logger;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.college.entity.College;
+import com.spring.college.entity.Student;
 import com.spring.college.service.CollegeService;
+import com.spring.college.service.StudentService;
 
 @Controller
 public class CollegeController {
@@ -28,13 +31,16 @@ public class CollegeController {
 	@Autowired
 	CollegeService collegeService;
 
+	@Autowired
+	StudentService studentService;
+
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 
 	@InitBinder
 	public void initBider(WebDataBinder dataBinder) {
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
 		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
-		dataBinder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"),false));
+		dataBinder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), false));
 	}
 
 	@RequestMapping(value = "/college/college-form")
@@ -71,5 +77,34 @@ public class CollegeController {
 	public String collegeDelete(@RequestParam("college") int theId, Model model) {
 		collegeService.deleteCollege(theId);
 		return "redirect:college-list";
+	}
+
+	@RequestMapping(value = "/college/student-form")
+	public String collegeStuedntForm(Model model) {
+		Student student = new Student();
+		model.addAttribute("student", student);
+		return "college-student-form";
+	}
+
+	@RequestMapping("/college/studentRegistration")
+	public String studentConfirmationForCollege(@Valid @ModelAttribute("student") Student student, BindingResult result,
+			HttpSession session, Model model) {
+		if (result.hasErrors()) {
+			return "college-student-form";
+		} else {
+			Integer userId = (Integer) session.getAttribute("userId");
+			College collegeIdBasedOnUserId = collegeService.getCollegeIdBasedOnUserId(userId);
+			student.setCollegeId(collegeIdBasedOnUserId.getId());
+			studentService.saveStudent(student);
+			return "redirect:college-student-list";
+		}
+	}
+
+	@RequestMapping(value = "/college/college-student-list")
+	public String getCollegeStudents(Model model, HttpSession session) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		logger.info("User Id of college is coming as:"+userId);
+		model.addAttribute("studentList", studentService.findByCollegeId(userId));
+		return "college-student-list";
 	}
 }

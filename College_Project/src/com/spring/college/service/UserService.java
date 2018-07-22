@@ -25,4 +25,6 @@ public interface UserService {
 	public void addUser(User userBean);
 
 	public void deleteUser(int id);
+	
+	public List<User> findByListId(Integer userId);
 }

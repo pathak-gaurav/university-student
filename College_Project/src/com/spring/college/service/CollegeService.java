@@ -13,4 +13,6 @@ public interface CollegeService {
 	public College getCollege(int id);
 
 	public void deleteCollege(int id);
+	
+	public College getCollegeIdBasedOnUserId(Integer userId);
 }

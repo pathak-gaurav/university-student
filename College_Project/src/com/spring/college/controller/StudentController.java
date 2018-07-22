@@ -3,6 +3,7 @@ package com.spring.college.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.college.entity.Student;
+import com.spring.college.service.MarksheetService;
 import com.spring.college.service.StudentService;
+import com.spring.college.service.UserService;
 
 @Controller
 public class StudentController {
 
 	@Autowired
 	StudentService studentService;
+	
+	@Autowired
+	MarksheetService marksheetService;
+	
+	@Autowired
+	UserService userService;
 
 	@InitBinder
 	public void initBider(WebDataBinder dataBinder) {
@@ -68,6 +77,22 @@ public class StudentController {
 	public String StudentDelete(@RequestParam("student") int theId, Model model) {
 		studentService.deleteStudent(theId);
 		return "redirect:student-list";
+	}
+	
+
+	@RequestMapping(value = "/user/my_profile")
+	public String my_profile(Model model, HttpSession session) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		model.addAttribute("userList", userService.findByListId(userId));
+		return "my_profile";
+	}
+	
+	@RequestMapping(value = "/marksheet/my_marks")
+	public String getMarks(Model model, HttpSession session) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		System.out.println("User Id is:"+userId);
+		model.addAttribute("marksheetList", marksheetService.getMarksheetIdBasedOnUserId(userId));
+		return "my_marks";
 	}
 
 }

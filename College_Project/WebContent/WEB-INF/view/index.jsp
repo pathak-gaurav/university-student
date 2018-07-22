@@ -20,7 +20,6 @@
 			<td  valign="top">
 				<!-- This is for form -->
 				<h3>User Login Form</h3> 
-
 				<c:if test="${err!=null}">
 					<p class="error">${err}</p>
 				</c:if>

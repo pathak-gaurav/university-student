@@ -5,7 +5,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-<title>College List</title>
+<title>Student List</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -25,29 +25,33 @@
 		<div align="left">
 			<table class="table table-bordered">
 				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Address</th>
-					<th>State</th>
-					<th>City</th>
-					<th>Phone</th>
+					<th>Student Id</th>
+					<th>College Id</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Mobile</th>
+					<th>Email</th>
+					<th>College Name</th>
+					<th>DOB</th>
 					<th>Update</th>
 					<th>Delete</th>
 				</tr>
-				<c:forEach var="tempCollege" items="${college}">
-					<c:url var="updateLink" value="/college/collegeFormForUpdate">
-						<c:param name="college" value="${tempCollege.id}" />
+				<c:forEach var="tempStudent" items="${studentList}">
+					<c:url var="updateLink" value="/student/studentFormForUpdate">
+						<c:param name="student" value="${tempStudent.studentId}" />
 					</c:url>
-					<c:url var="deleteLink" value="/college/college-delete">
-						<c:param name="college" value="${tempCollege.id}" />
+					<c:url var="deleteLink" value="/student/student-delete">
+						<c:param name="student" value="${tempStudent.studentId}" />
 					</c:url>
 					<tr>
-						<td>${tempCollege.id}</td>
-						<td>${tempCollege.name}</td>
-						<td>${tempCollege.address}</td>
-						<td>${tempCollege.state}</td>
-						<td>${tempCollege.city}</td>
-						<td>${tempCollege.phone}</td>
+						<td>${tempStudent.studentId}</td>
+						<td>${tempStudent.collegeId}</td>
+						<td>${tempStudent.firstName}</td>
+						<td>${tempStudent.lastName}</td>
+						<td>${tempStudent.mobile}</td>
+						<td>${tempStudent.email}</td>
+						<td>${tempStudent.collegeName}</td>
+						<td>${tempStudent.dob}</td>
 						<td><a href="${updateLink}">Update</a></td>
 						<td><a href="${deleteLink}">Delete</a></td>
 					</tr>

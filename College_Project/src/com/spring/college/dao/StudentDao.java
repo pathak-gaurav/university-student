@@ -14,4 +14,8 @@ public interface StudentDao {
 	
 	public void deleteStudent(int id);
 	
+	public Student getDetails(int id);
+	
+	public List<Student> findByCollegeId(Integer collegeId);
+	
 }

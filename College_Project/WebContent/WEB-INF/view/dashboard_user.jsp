@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Admin Dashboard</title>
+<title>User Dashboard</title>
 <style>
 .error {
 	color: red
@@ -20,8 +20,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 	<jsp:include page="menu.jsp"></jsp:include>
 	<br>
-	
 </body>

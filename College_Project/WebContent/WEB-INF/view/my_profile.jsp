@@ -5,7 +5,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-<title>College List</title>
+<title>My Profile</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -20,36 +20,26 @@
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 	<br>
-	
+
 	<div class="container">
 		<div align="left">
 			<table class="table table-bordered">
 				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Address</th>
-					<th>State</th>
-					<th>City</th>
-					<th>Phone</th>
-					<th>Update</th>
-					<th>Delete</th>
+					<th>FIRST NAME</th>
+					<th>LAST NAME</th>
+					<th>USERNAME</th>
+					<th>MOBILE</th>
+					<th>GENDER</th>
+					<th>DOB</th>
 				</tr>
-				<c:forEach var="tempCollege" items="${college}">
-					<c:url var="updateLink" value="/college/collegeFormForUpdate">
-						<c:param name="college" value="${tempCollege.id}" />
-					</c:url>
-					<c:url var="deleteLink" value="/college/college-delete">
-						<c:param name="college" value="${tempCollege.id}" />
-					</c:url>
+				<c:forEach var="c" items="${userList}" varStatus="st">
 					<tr>
-						<td>${tempCollege.id}</td>
-						<td>${tempCollege.name}</td>
-						<td>${tempCollege.address}</td>
-						<td>${tempCollege.state}</td>
-						<td>${tempCollege.city}</td>
-						<td>${tempCollege.phone}</td>
-						<td><a href="${updateLink}">Update</a></td>
-						<td><a href="${deleteLink}">Delete</a></td>
+						<td>${c.firstName}</td>
+						<td>${c.lastName}</td>
+						<td>${c.login}</td>
+						<td>${c.mobile}</td>
+						<td>${c.gender}</td>
+						<td>${c.dob}</td>
 					</tr>
 
 				</c:forEach>

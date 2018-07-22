@@ -40,4 +40,9 @@ public class StudentServiceImpl implements StudentService {
 		studentBeanDao.deleteStudent(id);
 	}
 
+	@Override
+	@Transactional
+	public List<Student> findByCollegeId(Integer userId){
+		return studentBeanDao.findByCollegeId(userId);
+	}
 }

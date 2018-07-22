@@ -18,5 +18,5 @@ public interface MarksheetDao {
 
 	public List<Marksheet> findByProperty(String propName, Object propValue);
 
-	public Marksheet getMarksheetIdBasedOnUserId(Integer userId);
+	public List<Marksheet> getMarksheetIdBasedOnUserId(Integer userId);
 }

@@ -74,4 +74,10 @@ public class UserDaoImpl  extends BaseDAO  implements UserDao {
 		currentSession.delete(userBean);
 	}
 
+	@Override
+	public List<User> findByListId(Integer userId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<User> createQuery = currentSession.createQuery("from User where userId="+userId, User.class);
+		return createQuery.getResultList();
+	}
 }

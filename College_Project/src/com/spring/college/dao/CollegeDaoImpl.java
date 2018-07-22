@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.college.entity.College;
+import com.spring.college.rm.CollegeRowMapper;
 
 @Repository
 public class CollegeDaoImpl extends BaseDAO implements CollegeDao {
@@ -65,7 +66,8 @@ public class CollegeDaoImpl extends BaseDAO implements CollegeDao {
 
 	@Override
 	public College getCollegeIdBasedOnUserId(Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT c.id,c.name,c.address,c.state,c.city,c.phone "
+				+ " FROM college c INNER JOIN user u ON (c.name=u.firstName) WHERE u.roleId=5 and userId=? ";
+		return getJdbcTemplate().queryForObject(sql, new CollegeRowMapper(), userId);
 	}
 }

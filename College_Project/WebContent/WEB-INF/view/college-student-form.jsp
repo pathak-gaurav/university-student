@@ -31,11 +31,6 @@
 			<form:hidden path="studentId" />
 			<table>
 				<tr>
-					<td>College Id:</td>
-					<td><form:input path="collegeId" /></td>
-					<td><form:errors path="collegeId" cssClass="error" /></td>
-				</tr>
-				<tr>
 					<td>First Name:</td>
 					<td><form:input path="firstName" /></td>
 					<td><form:errors path="firstName" cssClass="error" /></td>

@@ -39,4 +39,10 @@ public class MarksheetServiceImpl implements MarksheetService {
 	public void deleteMarksheet(int id) {
 		marksheetBeanDao.deleteMarksheet(id);
 	}
+
+	@Override
+	@Transactional
+	public List<Marksheet> getMarksheetIdBasedOnUserId(Integer userId) {
+		return marksheetBeanDao.getMarksheetIdBasedOnUserId(userId);
+	}
 }
