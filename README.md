@@ -1,4 +1,4 @@
-# college_project_hibernate
+# UNIVERSITY-STUDENT
 
 Description - This is the college management project made in Spring-MVC & Hibernate.
 
